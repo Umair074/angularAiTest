@@ -1,0 +1,120 @@
+@if (project()) {
+  <div class="project-details-page">
+    <!-- Back Navigation Banner -->
+    <div class="back-nav-container container">
+      <a routerLink="/" class="back-btn">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Portfolio
+      </a>
+    </div>
+
+    <!-- PROJECT HERO -->
+    <section class="details-hero container">
+      <div class="hero-image-panel glass-panel">
+        <img [src]="project()?.image" [alt]="project()?.title" class="hero-img"/>
+        <div class="hero-text-overlay">
+          <h1 class="project-title">{{ project()?.title }}</h1>
+          <p class="project-tagline">{{ project()?.tagline }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT LAYOUT -->
+    <section class="details-content-section container">
+      <div class="content-grid">
+        <!-- Main Case Study Content -->
+        <div class="main-content glass-panel">
+          <div class="content-block">
+            <h2>Project Overview</h2>
+            <p class="description-text">{{ project()?.description }}</p>
+          </div>
+
+          <div class="content-block">
+            <h2>Key Features Engineered</h2>
+            <ul class="features-list">
+              @for (feature of project()?.keyFeatures; track feature) {
+                <li>
+                  <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>{{ feature }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+
+          <div class="challenge-solution-grid">
+            <div class="problem-card">
+              <div class="icon-wrap red-glow">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+              </div>
+              <h3>The Challenge</h3>
+              <p>{{ project()?.challenge }}</p>
+            </div>
+
+            <div class="solution-card">
+              <div class="icon-wrap green-glow">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 11.08 12 19 2 9.08"></polyline>
+                  <polyline points="22 4 12 12.01 9 9.01"></polyline>
+                </svg>
+              </div>
+              <h3>The Solution</h3>
+              <p>{{ project()?.solution }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Specs -->
+        <div class="specs-sidebar">
+          <div class="sidebar-card glass-panel">
+            <h3>Project Specifications</h3>
+            
+            <div class="spec-item">
+              <span class="spec-label">Role</span>
+              <span class="spec-value">{{ project()?.role }}</span>
+            </div>
+
+            <div class="spec-item">
+              <span class="spec-label">Timeline</span>
+              <span class="spec-value">{{ project()?.timeline }}</span>
+            </div>
+
+            <div class="spec-item">
+              <span class="spec-label">Technologies</span>
+              <div class="tech-stack-badges">
+                @for (tech of project()?.technologies; track tech) {
+                  <span class="tech-badge-large">{{ tech }}</span>
+                }
+              </div>
+            </div>
+
+            <div class="project-actions">
+              <a [href]="project()?.liveUrl" target="_blank" rel="noopener noreferrer" class="btn btn-primary action-btn">
+                Visit Live Site
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+              <a [href]="project()?.githubUrl" target="_blank" rel="noopener noreferrer" class="btn btn-secondary action-btn">
+                Source Code
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+}
