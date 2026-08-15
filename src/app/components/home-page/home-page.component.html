@@ -11,16 +11,16 @@
       <div class="hero-content">
         <div class="badge-pill">
           <span class="pulse-dot"></span>
-          <span>Available for Frontend Roles</span>
+          <span>Available for Multiplatform Roles</span>
         </div>
         
         <h1 class="hero-title">
-          Engineering Sleek <br/>
-          <span class="gradient-text">Interactive Experiences</span>
+          Engineering Multiplatform <br/>
+          <span class="gradient-text">Web & Mobile Apps</span>
         </h1>
         
         <p class="hero-desc">
-          I'm Alex Rivera, a Creative Developer specializing in Angular development. I bridge the gap between design systems and high-fidelity code to build performant, accessible digital products.
+          I'm Umair Khalid, a Software Engineer specializing in Angular, CapacitorJS, and Kotlin Compose. I love vibe coding with the help of AI to build performant, native-grade applications and beautiful responsive web interfaces.
         </p>
         
         <div class="hero-actions">
@@ -46,18 +46,20 @@
               <span class="dot dot-red"></span>
               <span class="dot dot-yellow"></span>
               <span class="dot dot-green"></span>
-              <span class="file-name">App.component.ts</span>
+              <span class="file-name">UmairDev.kt</span>
             </div>
             <div class="card-body">
-              <pre><code><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'&#64;angular/core'</span>;
+              <pre><code><span class="keyword">import</span> androidx.compose.runtime.Composable
+<span class="keyword">import</span> io.capacitor.Plugin
 
-&#64;Component(&#123;
-  selector: <span class="string">'app-root'</span>,
-  templateUrl: <span class="string">'./app.html'</span>
-&#125;)
-<span class="keyword">export class</span> App &#123;
-  title = <span class="string">'Alex.Dev'</span>;
-  skills = [<span class="string">'Web'</span>, <span class="string">'Creative'</span>, <span class="string">'Design'</span>];
+<span class="annotation">&#64;Composable</span>
+<span class="keyword">fun</span> <span class="function">DeveloperProfile</span>() &#123;
+  <span class="keyword">val</span> name = <span class="string">"Umair Khalid"</span>
+  <span class="keyword">val</span> tech = <span class="keyword">listOf</span>(
+    <span class="string">"Angular"</span>, 
+    <span class="string">"CapacitorJS"</span>, 
+    <span class="string">"Kotlin Compose"</span>
+  )
 &#125;</code></pre>
             </div>
           </div>
@@ -77,24 +79,25 @@
           <div class="skill-category-card glass-panel">
             <div class="card-icon-container" [ngClass]="category.iconClass">
               <!-- Custom Category Icons -->
-              @if (category.iconClass === 'frontend-icon') {
+              @if (category.iconClass === 'angular-icon') {
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              } @else if (category.iconClass === 'capacitor-icon') {
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                  <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                </svg>
+              } @else if (category.iconClass === 'compose-icon') {
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                  <polyline points="2 17 12 22 22 17"></polyline>
-                  <polyline points="2 12 12 17 22 12"></polyline>
+                  <polygon points="12 17 2 12 12 7 22 12 12 17"></polygon>
+                  <polygon points="12 22 2 17 12 12 22 17 12 22"></polygon>
                 </svg>
-              } @else if (category.iconClass === 'backend-icon') {
+              } @else if (category.iconClass === 'ai-icon') {
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                  <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path>
-                </svg>
-              } @else if (category.iconClass === 'devops-icon') {
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
               } @else {
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -127,8 +130,18 @@
       <h2 class="section-title">Selected <span class="gradient-text">Projects</span></h2>
       <p class="section-subtitle">Explore a collection of interactive projects displaying user interface design, integration depth, and architectural performance.</p>
       
+      <!-- Project Filter Tabs -->
+      <div class="project-filters-container">
+        <div class="project-filters glass-panel">
+          <button class="filter-btn" [class.active]="selectedCategory() === 'all'" (click)="selectedCategory.set('all')">All</button>
+          <button class="filter-btn" [class.active]="selectedCategory() === 'angular'" (click)="selectedCategory.set('angular')">Angular Web</button>
+          <button class="filter-btn" [class.active]="selectedCategory() === 'capacitor'" (click)="selectedCategory.set('capacitor')">Capacitor Mobile</button>
+          <button class="filter-btn" [class.active]="selectedCategory() === 'composejs'" (click)="selectedCategory.set('composejs')">Kotlin + ComposeJS</button>
+        </div>
+      </div>
+      
       <div class="projects-grid">
-        @for (project of projects(); track project.id) {
+        @for (project of filteredProjects(); track project.id) {
           <div class="project-card glass-panel" [routerLink]="['/project', project.id]">
             <div class="card-image-wrapper">
               <img [src]="project.image" [alt]="project.title" class="project-img"/>
@@ -144,6 +157,11 @@
             </div>
             
             <div class="project-info">
+              <span class="project-category-tag" [ngClass]="project.category">
+                @if (project.category === 'angular') { Angular Web }
+                @else if (project.category === 'capacitor') { Capacitor Mobile }
+                @else if (project.category === 'composejs') { Kotlin + ComposeJS }
+              </span>
               <h3 class="project-title">{{ project.title }}</h3>
               <p class="project-tagline">{{ project.tagline }}</p>
               <p class="project-summary">{{ project.summary }}</p>
@@ -185,7 +203,7 @@
               </div>
               <div class="method-content">
                 <span class="method-label">Email Me</span>
-                <a href="mailto:alex.rivera@example.com" class="method-value">alex.rivera&#64;example.com</a>
+                <a href="mailto:umair.khalid@example.com" class="method-value">umair.khalid&#64;example.com</a>
               </div>
             </div>
 
@@ -198,7 +216,7 @@
               </div>
               <div class="method-content">
                 <span class="method-label">Location</span>
-                <span class="method-value">San Francisco, CA</span>
+                <span class="method-value">Pakistan</span>
               </div>
             </div>
 
@@ -212,7 +230,7 @@
               </div>
               <div class="method-content">
                 <span class="method-label">Social Portfolio</span>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="method-value">github.com/alexrivera</a>
+                <a href="https://github.com/umairkhalid" target="_blank" rel="noopener noreferrer" class="method-value">github.com/umairkhalid</a>
               </div>
             </div>
           </div>

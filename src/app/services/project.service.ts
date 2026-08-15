@@ -12,9 +12,10 @@ export interface Project {
   role: string;
   timeline: string;
   keyFeatures: string[];
-  githubUrl: string;
-  liveUrl: string;
+  githubUrl?: string;
+  liveUrl?: string;
   image: string;
+  category: 'angular' | 'capacitor' | 'composejs';
 }
 
 @Injectable({
@@ -23,29 +24,9 @@ export interface Project {
 export class ProjectService {
   private readonly projectsList = signal<Project[]>([
     {
-      id: 'novashop',
-      title: 'NovaShop',
-      tagline: 'Next-Gen E-Commerce Analytics Platform',
-      summary: 'A high-performance online retail experience equipped with instant multi-facet searches, responsive checkout, and merchant analytics dashboard.',
-      description: 'NovaShop is a state-of-the-art retail application designed for speed, beauty, and usability. It features a fully responsive client application integrated with a robust backend service to handle high checkout volumes while generating real-time metrics for merchants.',
-      challenge: 'Managing high-frequency shopping cart state updates and ensuring search operations remain responsive under heavy inventory catalog filtering without lagging the client-side execution thread.',
-      solution: 'Implemented visual state management with debounced search observables, client-side caching of query parameters, and highly optimized reactive lists. The checkout flow utilizes Stripe Elements configured dynamically via backend-controlled payment intents.',
-      technologies: ['Angular', 'RxJS', 'TypeScript', 'SCSS', 'Stripe API', 'Chart.js'],
-      role: 'Lead Full-Stack Architect',
-      timeline: '4 Months (Q1 2026)',
-      keyFeatures: [
-        'Instant multi-parameter catalog filtering and keyword search',
-        'Intuitive glassmorphism merchant dashboard with transaction graphs',
-        'Optimistic updates for shopping cart interactions',
-        'Secure multi-tier checkout integrated with Stripe API'
-      ],
-      githubUrl: 'https://github.com/example/novashop',
-      liveUrl: 'https://novashop-demo.example.com',
-      image: '/project1.jpg'
-    },
-    {
       id: 'aetherdash',
       title: 'AetherDash',
+      category: 'angular',
       tagline: 'Real-time Cloud Network Monitoring & Metric Explorer',
       summary: 'A futuristic analytics platform visualizing network topology health, server telemetry, and traffic spikes with millisecond precision.',
       description: 'AetherDash serves cloud operators by compiling complex log systems into sleek interactive diagrams. The tool plots globally distributed node statuses, latency distributions, and active alert systems in a unified glass-themed command interface.',
@@ -65,24 +46,47 @@ export class ProjectService {
       image: '/project2.jpg'
     },
     {
-      id: 'zenith',
-      title: 'Zenith Canvas',
-      tagline: 'Collaborative Gantt-integrated Workspace',
-      summary: 'A high-fidelity project collaboration interface mapping cards to timeline tracks with intuitive drag-and-drop mechanics.',
-      description: 'Zenith Canvas reinvents collaborative tracking by unifying Kanban boards with dynamic interactive timeline layouts. Designed for multi-tenant teams, it enables visual task updates, team member presence indicators, and milestones forecasting.',
-      challenge: 'Implementing fluid drag-and-drop operations between discrete page components (Kanban columns to Gantt timelines) while maintaining consistent cross-component state synchronization.',
-      solution: 'Customized drag-and-drop handlers using Angular CDK and managed coordinate system overlays to compute visual overlaps. Leveraged Angular signals to trigger immediate, fine-grained DOM recalculations.',
-      technologies: ['Angular', 'Angular CDK', 'RxJS', 'SCSS', 'TypeScript'],
-      role: 'UI/UX Developer',
+      id: 'syncmobile',
+      title: 'SyncMobile',
+      category: 'capacitor',
+      tagline: 'Offline-First Hybrid Task Management Suite',
+      summary: 'A cross-platform mobile task client using CapacitorJS to bridge web code with iOS and Android native storage and notification layers.',
+      description: 'SyncMobile allows enterprise teams to log tasks, update project boards, and trigger location-based notifications completely offline. Built as an Angular application, it is packaged with CapacitorJS to run natively on mobile hardware.',
+      challenge: 'Synchronizing locally cached task queues with the server backend upon restoration of network connectivity while preventing duplicate entry states.',
+      solution: 'Implemented a RxJS-based synchronizer combined with SQLite via Capacitor Community Data Storage. Listened to network connection changes via Capacitor Network plugin to auto-flush offline queues.',
+      technologies: ['Angular', 'CapacitorJS', 'SQLite', 'RxJS', 'TypeScript', 'Android Studio', 'Xcode'],
+      role: 'Hybrid Mobile Architect',
+      timeline: '4 Months (Q1 2026)',
+      keyFeatures: [
+        'Biometric authentication wrapper using Capacitor Fingerprint Auth',
+        'Background sync queue with auto-retry logic',
+        'Local notifications triggered by location geofencing',
+        'Unified SCSS layout conforming to Material Design and Cupertino guidelines'
+      ],
+      githubUrl: 'https://github.com/example/syncmobile',
+      // liveUrl is omitted to demonstrate optional link handling
+      image: '/project1.jpg'
+    },
+    {
+      id: 'composedesk',
+      title: 'ComposeDesk',
+      category: 'composejs',
+      tagline: 'Declarative Multiplatform Graphic & Canvas Workspace',
+      summary: 'An interactive, state-driven vector mockup drawing canvas built using Kotlin and Jetpack Compose for Web (ComposeJS).',
+      description: 'ComposeDesk delivers desktop-grade layout and mockup building workflows to browser clients. Written entirely in Kotlin, it utilizes Compose Multiplatform HTML/JS to compile declarative UI layouts running directly on the browser\'s DOM canvas.',
+      challenge: 'Maintaining fluid rendering rates (60FPS) while dragging vector shapes with complex gradients on a HTML canvas.',
+      solution: 'Utilized Kotlin Coroutines to isolate canvas calculations and leveraged Compose\'s smart recomposition loops to draw only modified canvas bounds.',
+      technologies: ['Kotlin', 'Compose Multiplatform', 'Kotlin/JS', 'Gradle', 'Canvas API', 'Kotlin Coroutines'],
+      role: 'Kotlin UI Engineer',
       timeline: '5 Months (Q3 2026)',
       keyFeatures: [
-        'Dynamic timeline track syncing with kanban board columns',
-        'Smooth coordinate overlaps handling using custom layout engines',
-        'Multi-member task assignment and visual tags filtering',
-        'Interactive workflow charts for tracking sprint progress'
+        'Full vector path rendering utilizing HTML Canvas context',
+        'Declarative UI state structures written completely in Kotlin',
+        'Dynamic zooming and panning controls with coordinate mappings',
+        'Export modules converting canvas layout JSON to SVG code'
       ],
-      githubUrl: 'https://github.com/example/zenith',
-      liveUrl: 'https://zenith-demo.example.com',
+      // githubUrl is omitted to demonstrate optional link handling
+      liveUrl: 'https://composedesk-demo.example.com',
       image: '/project3.jpg'
     }
   ]);

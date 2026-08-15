@@ -1,4 +1,4 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -18,27 +18,68 @@ export class HomePageComponent {
   // Load project list
   projects = signal<Project[]>(this.projectService.getProjects());
 
-  // Skills categorized
+  // Filter category state
+  selectedCategory = signal<string>('all');
+
+  // Filtered projects list
+  filteredProjects = computed(() => {
+    const category = this.selectedCategory();
+    const list = this.projects();
+    if (category === 'all') {
+      return list;
+    }
+    return list.filter(p => p.category === category);
+  });
+
+  // Skills categorized into the three requested tech stacks
   skillsCategories = signal([
     {
-      title: 'Frontend Architecture',
-      iconClass: 'frontend-icon',
-      skills: ['Angular', 'TypeScript', 'RxJS', 'State Management (NgRx/Signals)', 'HTML5 & SCSS', 'Next.js / React']
+      title: 'Angular (Web)',
+      iconClass: 'angular-icon',
+      skills: [
+        'Signals & Advanced Reactivity',
+        'TypeScript Architecture & Design Patterns',
+        'RxJS Stream Processing & Observables',
+        'State Management (Signals & Store Patterns)',
+        'SCSS & Custom Design Systems (Tailwind / UI Kits)',
+        'Angular Router, Custom Directives & Pipes'
+      ]
     },
     {
-      title: 'Backend & Systems',
-      iconClass: 'backend-icon',
-      skills: ['Node.js', 'Express & NestJS', 'PostgreSQL', 'MongoDB', 'REST APIs', 'GraphQL']
+      title: 'Angular + CapacitorJS (Mobile)',
+      iconClass: 'capacitor-icon',
+      skills: [
+        'Cross-Platform Hybrid App Architecture',
+        'Native Device APIs (Camera, Geolocation, Filesystem)',
+        'Local Secure Storage & Database Synchronization',
+        'Android Studio & Xcode Native Build Integration',
+        'Push Notifications & Local Geofencing Triggering',
+        'Mobile Interface Optimization & Cupertino/Material Styles'
+      ]
     },
     {
-      title: 'DevOps & Tooling',
-      iconClass: 'devops-icon',
-      skills: ['Docker', 'AWS (S3/EC2)', 'Git & GitHub Actions', 'CI/CD Pipelines', 'Vite & Webpack', 'Vercel / Netlify']
+      title: 'Kotlin + ComposeJS (Multiplatform)',
+      iconClass: 'compose-icon',
+      skills: [
+        'Kotlin Multiplatform (KMP) Shared Modules',
+        'Kotlin/JS Compilation & Webpack Orchestration',
+        'Declarative User Interface Design via Compose HTML/JS',
+        'Asynchronous Flow Management with Kotlin Coroutines',
+        'Skia Graphics Integration & Custom Canvas Vector Drawing',
+        'Multi-Platform State Modeling & UI Binding'
+      ]
     },
     {
-      title: 'Product & Design',
-      iconClass: 'design-icon',
-      skills: ['UI/UX Wireframing', 'Figma Design', 'Responsive Web Standards', 'Performance Tuning', 'SEO Best Practices', 'A11y Accessibility']
+      title: 'AI & Vibe Coding',
+      iconClass: 'ai-icon',
+      skills: [
+        'AI-Assisted Development (LLMs & Agentic Tools)',
+        'Prompt Engineering & Iterative Software Design',
+        'Rapid Prototyping & Flow State Integration',
+        'Cursor & Custom AI IDE Workflow Optimization',
+        'Refactoring, Code Translation & Automated Testing',
+        'Human-in-the-Loop Architecture Reviews'
+      ]
     }
   ]);
 
