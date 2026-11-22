@@ -87,6 +87,7 @@ export class HomePageComponent {
   contactForm: FormGroup;
   isSubmitting = signal<boolean>(false);
   submitSuccess = signal<boolean>(false);
+  submitError = signal<string | null>(null);
 
   constructor() {
     this.contactForm = this.fb.group({
@@ -111,24 +112,50 @@ export class HomePageComponent {
     }
   }
 
-  onSubmit() {
+  async onSubmit(): Promise<void> {
     if (this.contactForm.invalid) {
       this.contactForm.markAllAsTouched();
       return;
     }
 
+    if (this.isSubmitting()) {
+      return;
+    }
+
     this.isSubmitting.set(true);
+    this.submitError.set(null);
 
-    // Simulate sending message via network
-    setTimeout(() => {
-      this.isSubmitting.set(false);
-      this.submitSuccess.set(true);
+    const { name, email, subject, message } = this.contactForm.getRawValue();
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/umairkhalid074@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          _replyto: email,
+          _subject: subject,
+          message
+        })
+      });
+      const result = await response.json() as { success?: boolean | string; message?: string };
+
+      if (!response.ok || (result.success !== true && result.success !== 'true')) {
+        throw new Error(result.message || 'The email service could not accept your message.');
+      }
+
       this.contactForm.reset();
-
-      // Reset success state after a timeout
-      setTimeout(() => {
-        this.submitSuccess.set(false);
-      }, 5000);
-    }, 1500);
+      this.submitSuccess.set(true);
+      setTimeout(() => this.submitSuccess.set(false), 5000);
+    } catch (error: unknown) {
+      console.error('Contact form submission failed:', error);
+      this.submitError.set('Your message could not be sent. Please try again or email me directly.');
+    } finally {
+      this.isSubmitting.set(false);
+    }
   }
 }
